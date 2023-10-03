@@ -1,0 +1,102 @@
+---
+layout: layout.njk
+title: Index
+url: /
+---
+
+<section class="hero">
+    <div class="hero-body">
+        <h1 class="title">Produce Glossary</h1>
+        <div class="control has-icons-left">
+            <label for="search" class="is-sr-only"
+                >Produce Glossary Search</label
+            >
+            <input
+                class="input"
+                autofocus
+                autocomplete="off"
+                type="search"
+                id="search"
+                placeholder="Use a keyword to describe a fruit or vegetable..."
+            />
+            <span class="icon is-left">
+                <i class="fas fa-search"></i>
+            </span>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <ol id="results">
+        <li>
+            <i class="far fa-lightbulb"></i>
+            <em>Tip:</em>
+            Try searching <span class="tag">green</span> or
+            <span class="tag">round</span>
+        </li>
+        <li data-noresult>
+            No results found...
+        </li>
+        {% for post in collections.all %} {% if post.data.title != "Index" %}
+        <li data-result="{{ post.data.title.toLowerCase().replace(' ', '_') }}">
+            <a href="{{ post.data.url | url }}" class="is-size-5">{{
+                post.data.title
+            }}</a
+            >, matches <span class="tag">{{ post.data.title }}</span>
+        </li>
+        {% endif %} {% endfor %} {% for tag, posts in collections %} {% if tag
+        != "all" %} {% for post in posts %}
+        <li data-result="{{ tag.toLowerCase().replace(' ', '_') }}">
+            <a href="{{ post.data.url | url }}" class="is-size-5">{{
+                post.data.title
+            }}</a
+            >, matches <span class="tag">{{ tag }}</span>
+        </li>
+        {% endfor %} {% endif %} {% endfor %}
+    </ol>
+</section>
+
+<script>
+    const otherResults = (selected) => {
+        const allResults = [...document.querySelectorAll('#results li')]
+        return allResults.filter((result) => !selected.includes(result))
+    }
+
+    const showAll = (elements) => {
+        elements.forEach((el) => (el.style.display = 'block'))
+    }
+
+    const hideAll = (elements) => {
+        elements.forEach((el) => (el.style.display = 'none'))
+    }
+
+    const allTerms = [
+        ...document.querySelectorAll('#results [data-result]'),
+    ].map((result) => {
+        return result.dataset.result
+    })
+
+    const matchIndex = (input, terms) =>
+        terms.findIndex((term) => {
+            if (!input) return false
+            return term.includes(input)
+        })
+
+    const search = document.getElementById('search')
+    search.addEventListener('keyup', (e) => {
+        const matchingIndex = matchIndex(
+            e.currentTarget.value.toLowerCase().replace(' ', '_'),
+            allTerms
+        )
+        const matchingTerm = allTerms[matchingIndex]
+        let selected = [
+            ...document.querySelectorAll(`[data-result=${matchingTerm}]`),
+        ]
+
+        if (selected.length == 0) {
+            selected = [...document.querySelectorAll('[data-noresult]')]
+        }
+
+        showAll(selected)
+        hideAll(otherResults(selected))
+    })
+</script>

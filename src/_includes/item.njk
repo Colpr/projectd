@@ -1,0 +1,28 @@
+---
+layout: layout.njk
+---
+
+<section class="hero">
+    <div class="hero-body">
+        <div class="content">
+            <h2>{{ title }}</h2>
+
+            {{ content | safe }}
+
+            <h3>matching terms:</h3>
+            <div class="tags">
+                {% for tag, posts in collections %} {% for post in posts %} {%
+                if post.data.title == title %} {% if tag != "all" %}
+                <span class="tag">
+                    {{ tag }}
+                </span>
+                {% endif %} {% endif %} {% endfor %} {% endfor %}
+            </div>
+        </div>
+        <nav class="breadcrumb">
+            <ul>
+                <li><a href="{{ '/' | url }}">Back to Search</a></li>
+            </ul>
+        </nav>
+    </div>
+</section>
