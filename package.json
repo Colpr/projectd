@@ -6,6 +6,7 @@
     "scripts": {
         "start": "npx @11ty/eleventy --serve --port=8088",
         "deploy": "npx @11ty/eleventy --config=.eleventy.deploy.js"
+        "publish": "gh-pages -d src"
     },
     "repository": {
         "type": "git",
@@ -21,7 +22,7 @@
     "bugs": {
         "url": "https://github.com/Colpr/projectd/issues"
     },
-    "homepage": "https://github.com/Colpr/projectd#readme",
+    "homepage": "https://Colpr.github.io/projectd",
     "devDependencies": {
         "@11ty/eleventy": "^0.11.1",
         "html-minifier": "^4.0.0"
