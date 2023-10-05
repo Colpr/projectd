@@ -6,7 +6,6 @@
     "scripts": {
         "start": "npx @11ty/eleventy --serve --port=8088",
         "deploy": "npx @11ty/eleventy --config=.eleventy.deploy.js"
-        ,"publish": "gh-pages -d src"
     },
     "repository": {
         "type": "git",
