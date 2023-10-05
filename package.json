@@ -1,12 +1,12 @@
 {
-    "name": "front-matter-search",
+    "name": "projectd",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
     "scripts": {
         "start": "npx @11ty/eleventy --serve --port=8088",
         "deploy": "npx @11ty/eleventy --config=.eleventy.deploy.js"
-        "publish": "gh-pages -d src"
+        ,"publish": "gh-pages -d src"
     },
     "repository": {
         "type": "git",
