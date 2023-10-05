@@ -27,6 +27,6 @@
         "html-minifier": "^4.0.0"
     },
     "dependencies": {
-        "sass": "1.68.0"
+        "sass": "^1.68.0"
     }
 }
